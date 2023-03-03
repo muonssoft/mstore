@@ -1,11 +1,18 @@
 <template>
     <div>
-        <OrganinsmsCardItem age="12" @submit="subscribeUser" />
+        index
+      <OrganinsmsCardItem title="hola"/>
+      <OrganinsmsCardItem :title="'hola2'"/>
+      <OrganinsmsCardItem :title="data.title"/>
+      
+     
     </div>
 </template>
 
 <script setup>
-    function subscribeUser() {
-        console.log("form submitted! do something");
+    const data={
+        title:"Hola otra vez"
     }
+    
 </script>
+
