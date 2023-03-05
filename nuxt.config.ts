@@ -19,8 +19,8 @@ export default defineNuxtConfig({
                     },
                     {
                         rel: "icon",
-                        href: "https://res.cloudinary.com/dyv3z8tnm/image/upload/v1675793705/JOBS/icon-jobs_btwekh.svg",
-                        type:"image/webp"
+                        href: "assets/icon.svg",
+                        type:"image/svg"
                     },
                     {
                         rel: "preconnect",
