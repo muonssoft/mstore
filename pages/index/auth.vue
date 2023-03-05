@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-center items-center text-text gap-5 p-5 max-w-md w-full mx-auto">
+    <div class="flex flex-col justify-center items-center text-text gap-5 p-5 max-w-lg mx-auto w-full">
             <nuxt-link to="/">
                 <img src="@/assets/logo.svg" alt="" class="max-h-[3rem] h-full w-full"></nuxt-link>
             <div class="flex flex-col text-center gap-2">
