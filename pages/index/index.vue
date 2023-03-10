@@ -8,17 +8,27 @@
                 </div>
             <div class="flex items-center justify-center flex-col gap-2 w-full">
                 <div class="flex items-center w-full">
-                        <input v-model="email" @keyup="sendStoresData" type="email" id="registre" class="bg-transparent min-w-[17rem] w-full placeholder:font-light px-5 py-2 border border-orangeMain rounded-l-xl" placeholder="Ingresa tu correo electrónico">
+                        <input v-model="email" @keyup="sendStoresData" type="email" class="bg-transparent min-w-[17rem] w-full placeholder:font-light px-5 py-2 border border-orangeMain rounded-l-xl" placeholder="Ingresa tu correo electrónico">
                         <nuxt-link to="/registro" class="text-text border border-orangeMain bg-orangeMain px-5 rounded-r-xl font-light w-max text-center py-2 cursor-pointer">Registrate</nuxt-link>
                 </div>
                 <nuxt-link to="/auth" class="text-text px-5 py-1 underline font-light">Si ya tienes cuenta,<span class="font-medium"> inicia sesión</span></nuxt-link>
             </div>
+                    
+            <div v-if="user" class="fixed flex items-center gap-5 top-5 right-5 px-5 py-3 bg-white rounded-xl text-text font-light shadow-lg">
+            <i class="fi fi-rr-exclamation flex justify-center items-center"></i>
+            Ya tienes cuenta iniciada, serás redirigido a tu dashboard
+            <nuxt-link to="/dashboard" class="flex items-center gap-2 bg-orangeMain text-text px-3 py-2 rounded-md">Ir al dashboard <i class="fi fi-rr-arrow-small-right flex justify-center items-center"></i></nuxt-link>
+        </div>
+
     </div>
 </template>
 <script setup>
     import { useAuthStore } from '@/stores/auth'
     const authStore = useAuthStore()
     const email = ref(authStore.email)
+    const user =useSupabaseUser()
+
+    
 
     const sendStoresData = () =>{
         authStore.saveEmail(email.value)

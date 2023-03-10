@@ -15,21 +15,17 @@
 <script setup>
 
     const supabase = useSupabaseClient()
-
-    onBeforeMount(() => {
-        getProfile()
-    })
-
-    const getProfile = async () =>{
-        const { data, error } = await supabase
-        .from('profile')
-        .select()
-        console.log(data)
-    }
+    const user = useSupabaseUser() 
+    const router = useRouter()
 
     supabase.auth.onAuthStateChange((event, session) => {
-        console.log(event, session)
+        if(event === 'SIGNED_IN'){
+            setTimeout(() => {
+                router.push("/dashboard")
+            }, 3000);
+        }
     })
+
 
 
 /*     const info = ref({

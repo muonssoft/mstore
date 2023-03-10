@@ -11,24 +11,33 @@
                 <input @keyup="imprimir" v-model="email" type="email" id="email" class="bg-transparent min-w-[13rem] w-full placeholder:font-light px-5 py-2 border border-orangeMain rounded-xl" placeholder="Ingresa tu correo electrónico">
             </div>
             <div class="flex flex-col items-start gap-2 w-full">
-                <label for="email" class="font-light">Contraseña</label>
-                <input type="email" id="email" class="bg-transparent min-w-[13rem] w-full placeholder:font-light px-5 py-2 border border-orangeMain rounded-xl" placeholder="Ingresa tu contraseña">
+                <label for="password" class="font-light">Contraseña</label>
+                <input @keyup="imprimir" v-model="password" type="password" id="password" class="bg-transparent min-w-[13rem] w-full placeholder:font-light px-5 py-2 border border-orangeMain rounded-xl" placeholder="Ingresa tu contraseña">
             </div>
             <div class="w-full text-center gap-2 flex flex-col">
-                <div class="text-text bg-orangeMain px-5 rounded-xl font-light w-full text-center py-2 cursor-pointer">Iniciar sesión</div>
+                <div @click="singIn" class="text-text bg-orangeMain px-5 rounded-xl font-light w-full text-center py-2 cursor-pointer">Iniciar sesión</div>
                 <nuxt-link to="/registro" class="underline font-light">¿No tienes cuenta? <span class="font-medium">Registrate</span></nuxt-link>
             </div>
     </div>
 </template>
 <script setup>
+    const router = useRouter()
     import { useAuthStore } from '@/stores/auth'
+    const supabase = useSupabaseClient()
     const authStore = useAuthStore()
     const email = ref(authStore.email)
+    const password = ref("")
 
-    const imprimir = () =>{
-        console.log(email.value);
+
+    async function singIn(){
+        const { data, error } = await supabase.auth.signInWithPassword({
+                email: email.value,
+                password: password.value,
+            })
+        setTimeout(() => {
+            router.push("/dashboard")
+        }, 500);
     }
-
 </script>
 <style lang="">
     
